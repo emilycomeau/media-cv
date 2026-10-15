@@ -2,12 +2,10 @@ display_name,stub,dropdown_parent
 Home,/about.html
 Education,/education.html
 Teaching,/teaching.html
-Research Experience,/research.html
-Lectures & Workshops,/lectures.html
+Research,/research.html
+Lectures,/lectures.html
 Conferences,/conferences.html
 Publications,/publications.html
 Awards,/awards.html
 Service,/service.html
 Map,/map.html
-Timeline,/timeline.html
-
