@@ -3,14 +3,14 @@ Home,/,
 About,,
 About me,/about.html,About
 Education,/education.html,About
-Experience,,
-Teaching,/teaching.html,Experience
-Research,/research.html,Experience
-Talks,,
-Lectures,/lectures.html,Talks
-Workshops,/workshops.html,Talks
-Conference Presentations,/conferences.html,Talks
+Awards,/awards.html,About
+Service,/service.html,About
+Teaching,/teaching.html
+Research,/research.html
+Presentations,,
+Lectures,/lectures.html,Presentations
+Workshops,/workshops.html,Presentations
+Conference Presentations,/conferences.html,Presentations
 Publications,/publications.html
-Awards,/awards.html
-Service,/service.html
 Map,/map.html
+Timeline,/timeline.html
