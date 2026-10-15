@@ -1,10 +1,15 @@
 display_name,stub,dropdown_parent
-About,/about.html
-Education,/education.html
-Teaching,/teaching.html
-Research,/research.html
-Lectures,/lectures.html
-Conferences,/conferences.html
+Home,/,
+About,,
+About me,/about.html,About
+Education,/education.html,About
+Experience,,
+Teaching,/teaching.html,Experience
+Research,/research.html,Experience
+Talks,,
+Lectures,/lectures.html,Talks
+Workshops,/workshops.html,Talks
+Conference Presentations,/conferences.html,Talks
 Publications,/publications.html
 Awards,/awards.html
 Service,/service.html
