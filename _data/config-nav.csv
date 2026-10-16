@@ -1,7 +1,6 @@
 display_name,stub,dropdown_parent
-Home,/,
 About,,
-About me,/about.html,About
+About me,/,About
 Education,/education.html,About
 Awards,/awards.html,About
 Service,/service.html,About
@@ -13,4 +12,3 @@ Workshops,/workshops.html,Presentations
 Conference Presentations,/conferences.html,Presentations
 Publications,/publications.html
 Map,/map.html
-Timeline,/timeline.html
