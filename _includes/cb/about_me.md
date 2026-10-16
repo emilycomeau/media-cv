@@ -1,8 +1,10 @@
-## About Me
+##About Me
+---
+
 <div class="container my-4">
   
   <div>
-    
+
   <p>
 
     I am a PhD Candidate at UBC Okanagan, in the Interdisciplinary Graduate Studies Program -- Community Engagement, Social Change, and Equity theme. My research explores the role of digital technology in supporting land-based approaches to language revitalization. Through this research, I hope to shed light on some of the ways in which digital tools and spaces for language learning can be used to support and strengthen relationships with the land, and what these tools and spaces might look like. 
