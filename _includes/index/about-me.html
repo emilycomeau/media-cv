@@ -14,7 +14,7 @@
 <div class="card mb-3">
     <div class="card-body">
         <{{ include.heading_level | default: 'h2' | strip }} class="card-title h5">About Me</{{ include.heading_level | default: 'h2' | strip }}>
-        <p class="card-text">{{ site.about me }}</p>
+        <p class="card-text">{{ site.about-me }}</p>
         {%- assign about = site.data.config-nav | where: "stub","/about.html" | size -%}{% if about > 0 %}
         <a class="btn btn-{{ include.btn-color | default: 'primary' }}" href="{{ '/education.html' | relative_url }}" >Learn More &raquo;</a>{% endif %}
     </div>
