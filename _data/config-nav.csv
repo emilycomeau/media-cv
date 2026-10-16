@@ -1,5 +1,6 @@
 display_name,stub,dropdown_parent
 About,,
+About,/about.html,About
 About me,/,About
 Education,/education.html,About
 Awards,/awards.html,About
