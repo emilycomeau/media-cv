@@ -10,7 +10,7 @@
     
     <div>
     
-    {% include feature/button.html text="Learn More" link="https://emilycomeau.github.io/media-cv/education.html" color="success" align="center" %}  
+    {% include feature/button.html text="Learn More" link="https://emilycomeau.github.io/media-cv/education.html" color="success" centered=true %}  
     
     </div>
     
