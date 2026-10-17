@@ -8,9 +8,10 @@
    
     </div>
     
+    <div>
+    
+    {% include feature/button.html text="Learn More" link="https://emilycomeau.github.io/media-cv/education.html" color="success" %}
+    
+    </div>
+    
 </div>
-            <div>
-                
-                {% include feature/button.html text="Learn More" link="https://emilycomeau.github.io/media-cv/education.html" color="success" %}
-           
-            </div>
