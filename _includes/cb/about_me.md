@@ -1,3 +1,10 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <{{ include.heading_level | default: 'h2' | strip }} class="card-title h5">About Me</{{ include.heading_level | default: 'h2' | strip }}>
+        <p class="card-text">{{ site.description }}</p>
+    </div>
+</div>
+
 <div class="container my-4">
   <div>
     
