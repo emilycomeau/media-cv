@@ -2,12 +2,13 @@
 # Default home page with boxes providing collection stats
 layout: page
 ---
+
+<div class="row">
   <div class="col-md-8">
 
     {% include cb/about_me.md %}
 
   </div>
-  
   <div class="col-md-8">
     
     {% include index/carousel.html title="Sample Items" height=450 %}
@@ -20,5 +21,6 @@ layout: page
     {% include index/featured-terms.html field="location" title="Locations" btn-color="outline-secondary" %}
 
     {% include index/objects.html %}
-
+  
   </div>
+</div>
