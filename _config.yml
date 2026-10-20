@@ -18,23 +18,26 @@ source-code: https://github.com/CollectionBuilder/collectionbuilder-csv
 # SITE SETTINGS
 #
 # title of site appears in banner
-title: CollectionBuilder CSV
+title: Emily Comeau
 # tagline, a short phrase that will appear throughout the site in the top banner
-tagline: Digital Collection Magic with Static Web Technologies
+# tagline: Digital Collection Magic with Static Web Technologies
+about: "I am a PhD Candidate at UBC Okanagan, in the Interdisciplinary Graduate Studies Program - Community Engagement, Social Change, and Equity theme. My research explores the role of digital technology in supporting land-based approaches to language revitalization. Through this research, I hope to shed light on some of the ways in which digital tools and spaces for language learning can be used to support and strengthen relationships with the land, and what these tools and spaces might look like. As a sessional instructor at UBC Okanagan, I primarily teach courses in linguistic anthropology, such as Anthropology of Reading and Writing (ANTH 277) and Introduction to Linguistic Anthropology (ANTH 170). I am a Canadian settler with mixed European heritage, currently living on unceded lək̓ʷəŋən territory on Vancouver Island, British Columbia."
 # description appears in meta tags and other locations
 # this description might appear in search result lists, keep around 160 characters max
-description: "CollectionBuilder-CSV is a template for creating digital collection exhibits using static web technology."
+description: "This is a digital collection of works by Emily Comeau. This site was built using CollectionBuilder."
 # keywords, a short list of subjects describing the collection, separated by semicolon, to appear in rich markup
-keywords: idaho; history; inland northwest
+# keywords: 
 # creator of the digital collection, to appear in meta tags; we typically use our GitHub usernames but feel free to just use your name
-author: CollectionBuilder
+author: emilycomeau
+note: "NOTE: This website is currently in active development and is being updated frequently with new items. Check back often for more information!"
 
 ##########
 # COLLECTION SETTINGS
 #
 # Set the metadata for your collection (the name of the CSV file in your _data directory that describes the objects in your collection) 
 # Use the filename of your CSV **without** the ".csv" extension! E.g. _data/demo-metadata.csv --> "demo-metadata"
-metadata: demo-compoundobjects-metadata 
+metadata: ecomeau-cbcv-site.csv
+
 # page generation settings [optional!]
 # [optional: only used if you need to tweak CB defaults or generate from more than one data file]
 # page_gen:
@@ -50,11 +53,11 @@ metadata: demo-compoundobjects-metadata
 #
 # Enter name and link for your organization (replacing the name and links below)
 # These values will be used in attribution and data 
-organization-name: "Center for Digital Inquiry and Learning (CDIL)"
-organization-link: https://cdil.lib.uidaho.edu/
+# organization-name: "Center for Digital Inquiry and Learning (CDIL)"
+# organization-link: https://cdil.lib.uidaho.edu/
 # Add logo image links if you would like them to appear in banner and footer. Delete or leave blank to remove logos.
-organization-logo-banner: https://www.lib.uidaho.edu/collectionbuilder/cdil-black.png
-organization-logo-nav: https://www.lib.uidaho.edu/collectionbuilder/cdil-white.png
+# organization-logo-banner: https://www.lib.uidaho.edu/collectionbuilder/cdil-black.png
+# organization-logo-nav: https://www.lib.uidaho.edu/collectionbuilder/cdil-white.png
 
 ##########
 # ROBOTS EXCLUDE
