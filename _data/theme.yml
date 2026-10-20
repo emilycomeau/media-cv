@@ -8,10 +8,10 @@
 #
 # featured image is used in home page banner and in meta markup to represent the collection
 # use either an objectid (from an item in this collect), a relative location of an image in this repo, or a full url to an image elsewhere
-featured-image: demo_033
+featured-image: /objects/20260817_gonzales-lookout.jpg
 featured-image-alt-text: # add alt text if using url for featured-image (objectid will be automatic from metadata)
 # optional: add extra padding above collection title for a larger image feature. 
-home-title-y-padding: 10em # the margin from the top your title portion will appear.
+home-title-y-padding: 8em # the margin from the top your title portion will appear.
 # optional: change position of background image, center, top, bottom
 home-banner-image-position: center # Default is center
 
@@ -83,8 +83,8 @@ metadata-facets-fields: "subject,creator,format"
 # select true below if you'd like your compound object's child objects to appear in any of the pages or features listed
 map-child-objects: true # true / false - if true, and if child item has latitude and longitude, child objects will be displayed on map
 timeline-child-objects: true # true / false - if true, and if child object has date, child objects will appear as thumbnails on timeline page
-data-child-objects: false # true / false - if true, child objects will appear linked in table on data page
-browse-child-objects: false # true / false - if true, child objects will appear on browse page and child objects' metadata will populate cloud pages like Subjects page and Locations page, as well as featured terms boxes on the home page
+data-child-objects: true # true / false - if true, child objects will appear linked in table on data page
+browse-child-objects: true # true / false - if true, child objects will appear on browse page and child objects' metadata will populate cloud pages like Subjects page and Locations page, as well as featured terms boxes on the home page
 search-child-objects: true # true / false - if true, child objects will appear on on search page along with parent objects
 
 
