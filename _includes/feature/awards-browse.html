@@ -1,0 +1,25 @@
+{%- assign items = site.data[site.metadata] | where_exp: 'item', 'item.subject contains "award"' | sort: "date_range" -%}
+
+<div class="row mb-2">
+    <div class="col-7 col-lg-9">{{ content }}</div>
+</div>
+<div class="col-lg-2">
+    <button class="btn btn-secondary mt-1 dropdown-toggle" type="button" id="browseSortButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort by <span id="sortFilter">Random</span>
+    </button>
+    <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
+        <button class="dropdown-item browse-sort-item {% if site.data.theme.default-sort-field == '' %}active{% endif %}" data-filter="random">Random</button>
+        <button class="dropdown-item browse-sort-item" data-filter="title">Name</button>
+        <button class="dropdown-item browse-sort-item" data-filter="location">Location</button>
+        <button class="dropdown-item browse-sort-item" data-filter="date_range">Date</button>
+        {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %}
+        {% for o in sort_options %}
+        <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{ o.sort_name }}</button>
+        {% endfor %}
+    </div>
+    <button class="btn btn-outline-secondary filter p-1 d-lg-none float-end" onclick="resetFilter(); return false;" data-filter="">Reset</button>
+</div>
+<div id="loadingIcon" class="text-center">
+    <div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span>
+    </div>
+</div>
