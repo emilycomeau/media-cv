@@ -35,11 +35,15 @@
 {% else %}
 {%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid and item.parentid == nil' -%}
 {% endif %}
-{% if include.gallery-type %}
-{%- assign gallery-items = gallery-items | where_exp: "item","item.display_template == include.gallery-type" -%}
-{% else %}
-{%- assign gallery-items = gallery-items |  where_exp: "item","item.image_small != nil or item.image_thumb != nil" -%}
-{% endif %} 
+
+{% comment %} 
+    {% if include.gallery-type %}
+    {%- assign gallery-items = gallery-items | where_exp: "item","item.display_template == include.gallery-type" -%}
+    {% else %}
+    {%- assign gallery-items = gallery-items |  where_exp: "item","item.image_small != nil or item.image_thumb != nil" -%}
+    {% endif %} 
+{%- endcomment -%}
+
 {%- if include.filter-field and include.filter-value -%}
 {%- assign gallery-items = gallery-items | where_exp: 'item','item[include.filter-field] contains include.filter-value' -%}
 {%- elsif include.filter -%}
@@ -48,28 +52,69 @@
 {% assign gallery-limit = include.limit | default: 200 %}
 {% capture captions %}{{ include.captions | default: "true" }}{% endcapture %}
 
-
 {% if include.image-heading and include.heading%}
 {% include feature/jumbotron.html objectid=include.image-heading heading=include.heading text=false padding="5rem" %}
 {% elsif include.image-heading %}
 {% include feature/jumbotron.html objectid=include.image-heading %}
 {% elsif include.heading %}
-<h2>{{ include.heading }}</h2>{% endif %}
-<div class="row my-3 py-3 {{ include.container-styles }}">
-    {% if include.context %}<p> {{include.context}} </p>{% endif %}
+<h2>{{ include.heading }}</h2>
+{% endif %}
+
+{%- if include.objectid == true -%}
+{%- assign item = site.data[site.metadata] | where: "objectid", include.objectid | first -%}
+{%- capture src -%}{{ item.image_small | default: item.object_location | relative_url }}{% endcapture %}
+{%- capture alt -%}{{ item.image_alt_text | default: item.description | default: item.title }}{% endcapture %}
+{%- endif -%}
+
+{% comment %}
+    {% if item.display_template == "video" %}
+    {% include feature/video.html objectid=item.objectid caption=include.captions %}
+    {% elsif item.display_template == "pdf" %}
+    {% include feature/pdf.html objectid=item.objectid caption=include.captions %}
+    {% elsif item.display_template == "audio" %}
+    {% include feature/audio.html objectid=item.objectid caption=include.captions %}
+    {% elsif item.display_template == "image" %}
+    {% include feature/image.html objectid=item.objectid %}
+    {% else %}
+    {% include feature/card.html objectid=item.objectid caption=include.captions %}{% endif %}
+{%- endcomment -%}
+
+{% comment %}
+    <div class="row my-3 py-3 {{ include.container-styles }}">
+{%- endcomment -%}
+
+<div class="item col-lg-4 col-md-6 mb-2">
     {% for item in gallery-items limit:gallery-limit %}
-    <div class="{% if include.item-size == 'tiny' %}col-lg-2 col-sm-4 col-xs-6{% elsif include.item-size == 'small' %}col-lg-3 col-sm-6{% elsif include.item-size == 'large' %}col-xl-4 col-lg-6{% else %}col-lg-4 col-sm-6{% endif %} {{ include.item-styles }}">
-        {% if include.gallery-type == "video" %}
-        {% include feature/video.html objectid=item.objectid caption=include.captions %}
-        {% elsif include.gallery-type == "pdf" %}
-        {% include feature/pdf.html objectid=item.objectid caption=include.captions %}
-        {% elsif include.gallery-type == "audio" %}
-        {% include feature/audio.html objectid=item.objectid caption=include.captions %}
-        {% elsif include.gallery-type == "record" %}
-        {% include feature/card.html objectid=item.objectid %}
-        {% else %}
-        {% include feature/card.html objectid=item.objectid %}{% endif %}
+    <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
+        
+{% comment %}
+        <div class="{% if include.item-size == 'tiny' %}col-lg-2 col-sm-4 col-xs-6{% elsif include.item-size == 'small' %}col-lg-3 col-sm-6{% elsif include.item-size == 'large' %}col-xl-4 col-lg-6{% else %}col-lg-4 col-sm-6{% endif %} {{ include.item-styles }}">
+{%- endcomment -%}
+            
+            {% if item.image_thumb %}
+            <img class="lazyload img-thumbnail timeline-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.image_thumb | relative_url }}" alt="{{ item.image_alt_text | default: item.description | default: item.title | escape }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.title | escape }}">
+            {% else %}
+            <div class="card mb-3{% if include.float %} feature-float-{{ include.float }}{% endif %}{% if include.width %} feature-w-{{ include.width }}{% endif %}{% if include.centered %} mx-auto{% endif %}">
+                {% if src %}<img class="card-img-top" src="{{ src }}" alt="{{ alt | escape }}">{%- endif -%}
+
+{% comment %}
+            {% if include.header %}<{{ include.heading_level | default: 'h2' | strip }} class="card-header">{{ include.header }}</{{ include.heading_level | default: 'h2' | strip }}>{%- endif -%}
+{%- endcomment -%}
+
+            </div>
+            {% endif %}
+
+            <div class ="card">
+                <div class="card-body text-center">
+                    <div class="card-text">{{ include.text | markdownify }}</div>
+                        <div class="h5 text-dark">{{ item.title }}</div>
+                            <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">
+                                {%- assign icon_template = item.display_template | default: item.format -%}
+                                <use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#{% if icon_template contains 'image' %}icon-image{% elsif icon_template contains 'pdf' %}icon-pdf{% elsif icon_template contains 'audio' %}icon-audio{% elsif icon_template contains 'video' %}icon-video{% elsif icon_template contains 'panorama' %}icon-panorama{% elsif icon_template contains 'compound' %}icon-compound-object{% elsif icon_template contains 'multiple' %}icon-multiple{% else %}icon-default{% endif %}"/>
+                            </svg>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 

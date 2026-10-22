@@ -11,4 +11,4 @@ permalink: /awards.html
 
 ##### This is a list of grants, awards, and scholarships that I have received during my career.
 
-{% include feature/gallery.html child-objects=true %}
+{% include feature/gallery-sorted.html objectid=true child-objects=true %}
