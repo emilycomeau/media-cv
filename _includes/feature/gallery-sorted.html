@@ -125,22 +125,65 @@
 {%- assign fields = site.data.config-metadata | where_exp: 'item', 'item.display_name != nil' -%}
 {%- endcomment -%}
 
-{% comment %}
-{% if item.amount %}
-<strong>Amount: </strong>{{item.amount}}{%- endif -%}
-{% if item.role %}
-<strong>Role: </strong>{{item.role}}
-{% elsif item.course %}
-<strong>Course: </strong>{{item.course}}
-{% elsif item.project %}
-<strong>Project: </strong>{{item.project}}
-{% elsif item.event %}
-<strong>Event: </strong>{{item.event}}
-{% elsif item.authors %}
+{% if item.subject == award %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Amount: </strong>{{item.amount}}<br/>
+<Strong>Organization: </Strong>{{item.institution}}
+{%- endif -%}
+
+{% if item.subject == conference %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Event: </strong>{{item.event}}<br/>
+<strong>Host: </strong>{{item.institution}}<br/>
 <strong>Authors: </strong>{{item.authors}}
-{% elsif item.institution %}
-<strong>Institution: </strong>{{item.institution}}{%- endif -%}
-{%- endcomment -%}
+{%- endif -%}
+
+{% if item.subject == education %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Program: </strong>{{item.description}}<br/>
+<strong>University: </strong>{{item.institution}}
+{%- endif -%}
+
+{% if item.subject == lecture %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Event: </strong>{{item.event}}
+{%- endif -%}
+
+{% if item.subject == media %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Location: </strong>{{item.location}}
+{%- endif -%}
+
+{% if item.subject == professional %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Role: </strong>{{item.role}}<br/>
+<strong>Organization: </strong>{{item.institution}}
+{%- endif -%}
+
+{% if item.subject == research %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Role: </strong>{{item.role}}<br/>
+<strong>Project: </strong>{{item.project}}<br/>
+<strong>Organization: </strong>{{item.institution}}
+{%- endif -%}
+
+{% if item.subject == service %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Role: </strong>{{item.role}}
+{%- endif -%}
+
+{% if item.subject == teaching %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>Role: </strong>{{item.role}}<br/>
+<strong>Course: </strong>{{item.course}}<br/>
+<strong>University: </strong>{{item.institution}}
+{%- endif -%}
+
+{% if item.subject == workshop %}
+<strong>Date: </strong>{{item.date_range}}<br/>
+<strong>University: </strong>{{item.institution}}
+{%- endif -%}
+
 
                 </div>
             </div>
@@ -152,8 +195,8 @@
         to do: 
         -add padding around cards
         -get the cards to display in a grid instead of one per line
-        -add metadata fields for display - organize by if statements for items grouped by subject
-        -make the image smaller (like a header)
-        -add buttons to cards
-        -add sort button to page
+        -re-upload metadata from google sheets
+        -make the image headers smaller (like CB Browse page)
+        -add buttons to cards: item format, "View full record"
+        -add sort button to page (top right)
     {%- endcomment -%}
