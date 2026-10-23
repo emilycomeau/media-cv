@@ -2,10 +2,13 @@ display_name,stub,dropdown_parent
 About,,
 About-cb,/about.html,About
 About me,/,About
+Education,/education.html,About
 Awards,/awards.html,About
 Service,/service.html,About
 Teaching,/teaching.html
-Research,/research.html
+Research,,
+Research Experience,/research.html,Research
+Professional Experience,/professional.html,Research
 Presentations,,
 Lectures,/lectures.html,Presentations
 Workshops,/workshops.html,Presentations

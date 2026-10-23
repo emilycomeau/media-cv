@@ -31,9 +31,9 @@
 {%- endcomment -%}
 
 {% if include.child-objects == true %}
-{%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid' -%}
+{%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid' | order_by: 'date_range, 'desc' -%}
 {% else %}
-{%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid == nil' -%}
+{%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid and item.parentid == nil' | order_by: 'date_range', 'desc' -%}
 {% endif %}
 
 {%- if include.filter-field and include.filter-value -%}
@@ -44,12 +44,11 @@
 {% assign gallery-limit = include.limit | default: 200 %}
 {% capture captions %}{{ include.captions | default: "true" }}{% endcapture %}
 
-
 <div class="row">
     {% for item in gallery-items limit:gallery-limit %}
-    <div class="col-xs-3 col-md-5 {{include.container-styles}}">
+    <div class="col-xs-2 col-md-4 {{include.container-styles}}">
 
-            <div class="card">
+            <div class="card mb-3 feature-float-{{ include.float }}">
                 <div class="card-body text-center">
                     <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
                         <div class="h5 text-dark">{{ item.title }}</div>
@@ -57,76 +56,81 @@
                     <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
                         {% if item.image_thumb %}
                         <img class="lazyload img-thumbnail timeline-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.image_thumb | relative_url }}" alt="{{ item.image_alt_text | default: item.description | default: item.title | escape }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.title | escape }}">
-                        {% else %}
-                        <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#{% if icon_template contains 'pdf' %}icon-pdf{% elsif icon_template contains 'audio' %}icon-audio{% elsif icon_template contains 'video' %}icon-video{% elsif icon_template contains 'panorama' %}icon-panorama{% elsif icon_template contains 'compound' %}icon-compound-object{% elsif icon_template contains 'multiple' %}icon-multiple{% else %}icon-default{% endif %}"/></svg>
-                        <div class="card mb-3{% if include.float %} feature-float-{{ include.float }}{% endif %}{% if include.width %} feature-w-{{ include.width }}{% endif %}{% if include.centered %} mx-auto{% endif %}">
-                            {% if src %}<img class="card-img-top" src="{{ src }}" alt="{{ alt | escape }}">{%- endif -%}
-                        </div>
+                        {% elsif item.format == "compound_object" %}
+                        <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-compound-object"/></svg>
+                        {% elsif item.format == "video"}
+                        <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-video"/></svg>
+                        {% elsif item.format == "pdf" %}
+                        <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-pdf"/></svg>
+                        {% elsif item.format == "audio" %}
+                        <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-audio"/></svg>
                         {% endif %}
                     </a>
         
                     {%- assign fields = site.data.config-metadata | where_exp: 'item', 'item.display_name != nil' -%}
-                    {% if item.subject == "award" %}       
+                    {% if item.subject contains "award" %}       
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Amount: </strong>{{item.amount}}<br />
                         <strong>Organization: </Strong>{{item.institution}}</small></p>
 
-                    {% elsif item.subject == "conference" %}
+                    {% elsif item.subject contains "conference" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Event: </strong>{{item.event}}<br />
                         <strong>Host: </strong>{{item.institution}}<br />
                         <strong>Authors: </strong>{{item.authors}}</small></p>
 
-                    {% elsif item.subject == "education" %}
+                    {% elsif item.subject contains "education" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Program: </strong>{{item.description}}<br />
-                        <strong>University: </strong>{{item.institution}}</small></p>
+                        <strong>University: </strong>{{item.institution}}<br />
+                        {% if item.supervisor %}<strong>Supervisor: </strong>{{item.supervisor}}{% endif}</small></p>
 
-                    {% elsif item.subject == "lecture" %}
+                    {% elsif item.subject contains "lecture" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Event: </strong>{{item.event}}</small></p>
 
-                    {% elsif item.subject == "media" %}
+                    {% elsif item.subject contains "media" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Location: </strong>{{item.location}}</small></p>
 
-                    {% elsif item.subject == "professional" %}
+                    {% elsif item.subject contains "professional" %}
                      <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Role: </strong>{{item.role}}<br />
                         <strong>Organization: </strong>{{item.institution}}</small></p>
 
-                    {% elsif item.subject == "publication" %}
+                    {% elsif item.subject contains "publication" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Authors: </strong>{{item.authors}}<br />
                         <strong>Publication: </strong>{{item.publication}}</small></p>
 
-                    {% elsif item.subject == "research" %}
+                    {% elsif item.subject contains "research" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Role: </strong>{{item.role}}<br />
                         <strong>Project: </strong>{{item.project}}<br />
                         <strong>Organization: </strong>{{item.institution}}</small></p>
 
-                    {% elsif item.subject == "service" %}
+                    {% elsif item.subject contains "service" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
-                        <strong>Role: </strong>{{item.role}}</small></p>
+                        <strong>Role: </strong>{{item.role}}<br />
+                        <strong>Organization: </Strong>{{item.institution}}</small></p>
 
-                    {% elsif item.subject == "teaching" %}
+                    {% elsif item.subject contains "teaching" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Role: </strong>{{item.role}}<br />
                         <strong>Course: </strong>{{item.course}}<br />
                         <strong>University: </strong>{{item.institution}}</small></p>
 
-                    {% elsif item.subject == "workshop" %}
+                    {% elsif item.subject contains "workshop" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>University: </strong>{{item.institution}}</small></p>
@@ -140,13 +144,3 @@
         </div>
         {% endfor %}
     </div>
-</div>
-
-    {% comment %}
-        to do: 
-        -add padding around cards
-        -get the cards to display in a grid instead of one per line
-        -make the image headers smaller (like CB Browse page)
-        -add buttons to cards: item format, "View full record"
-        -add sort button to page (top right)
-    {%- endcomment -%}

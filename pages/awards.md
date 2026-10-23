@@ -7,8 +7,7 @@ permalink: /awards.html
 #filter="item.subject contains 'Award'"
 ---
 
-# Awards
-
-##### This is a list of grants, awards, and scholarships that I have received during my career.
+## Awards, Grants, and Scholarships
+<p></p>
 
 {% include feature/gallery-sorted.html filter-field="subject" filter-value="award" child-objects=true %}
