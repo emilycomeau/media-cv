@@ -85,8 +85,8 @@
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Program: </strong>{{item.description}}<br />
-                        <strong>University: </strong>{{item.institution}}<br />
-                        {% if item.supervisor %}<strong>Supervisor: </strong>{{item.supervisor}}{% endif}</small></p>
+                        <strong>Supervisor: </strong>{{item.supervisor}}<br />
+                        <strong>University: </strong>{{item.institution}}</small></p>
 
                     {% elsif item.subject contains "lecture" %}
                     <p class="card-text"><small>
