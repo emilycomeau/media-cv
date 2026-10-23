@@ -7,6 +7,7 @@ institution,Institution,,,,,
 course,Course,,,,,
 project,Project,,,,,
 authors,Authors,,,,,
+publication,Publication,,,,,
 event,Event,,,,,
 amount,Amount,,,,,
 subject,Subjects,true,,DCTERMS.subject,keywords

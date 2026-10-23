@@ -33,16 +33,8 @@
 {% if include.child-objects == true %}
 {%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid' -%}
 {% else %}
-{%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid and item.parentid == nil' -%}
+{%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid == nil' -%}
 {% endif %}
-
-{% comment %} 
-    {% if include.gallery-type %}
-    {%- assign gallery-items = gallery-items | where_exp: "item","item.display_template == include.gallery-type" -%}
-    {% else %}
-    {%- assign gallery-items = gallery-items |  where_exp: "item","item.image_small != nil or item.image_thumb != nil" -%}
-    {% endif %} 
-{%- endcomment -%}
 
 {%- if include.filter-field and include.filter-value -%}
 {%- assign gallery-items = gallery-items | where_exp: 'item','item[include.filter-field] contains include.filter-value' -%}
@@ -52,150 +44,108 @@
 {% assign gallery-limit = include.limit | default: 200 %}
 {% capture captions %}{{ include.captions | default: "true" }}{% endcapture %}
 
-{% comment %}
-    {% if include.image-heading and include.heading%}
-    {% include feature/jumbotron.html objectid=include.image-heading heading=include.heading text=false padding="5rem" %}
-    {% elsif include.image-heading %}
-    {% include feature/jumbotron.html objectid=include.image-heading %}
-    {% elsif include.heading %}
-    <h2>{{ include.heading }}</h2>
-    {% endif %}
-{%- endcomment -%}
 
-{% comment %}
-    {%- if include.objectid == true -%}
-    {%- assign item = site.data[site.metadata] | where: "objectid", include.objectid | first -%}
-    {%- capture src -%}{{ item.image_small | default: item.object_location | relative_url }}{% endcapture %}
-    {%- capture alt -%}{{ item.image_alt_text | default: item.description | default: item.title }}{% endcapture %}
-    {%- endif -%}
-{%- endcomment -%}
-
-{% comment %}
-    {% if item.display_template == "video" %}
-    {% include feature/video.html objectid=item.objectid caption=include.captions %}
-    {% elsif item.display_template == "pdf" %}
-    {% include feature/pdf.html objectid=item.objectid caption=include.captions %}
-    {% elsif item.display_template == "audio" %}
-    {% include feature/audio.html objectid=item.objectid caption=include.captions %}
-    {% elsif item.display_template == "image" %}
-    {% include feature/image.html objectid=item.objectid %}
-    {% else %}
-    {% include feature/card.html objectid=item.objectid caption=include.captions %}{% endif %}
-{%- endcomment -%}
-
-{% comment %}
-    <div class="row my-3 py-3 {{ include.container-styles }}">
-{%- endcomment -%}
-
-<div class="item col-lg-4 col-md-6 mb-2">
-
-
+<div class="row">
     {% for item in gallery-items limit:gallery-limit %}
-    <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
-        
-{% comment %}
-        <div class="{% if include.item-size == 'tiny' %}col-lg-2 col-sm-4 col-xs-6{% elsif include.item-size == 'small' %}col-lg-3 col-sm-6{% elsif include.item-size == 'large' %}col-xl-4 col-lg-6{% else %}col-lg-4 col-sm-6{% endif %} {{ include.item-styles }}">
-{%- endcomment -%}
-            
-            {% if item.image_thumb %}
-            <img class="lazyload img-thumbnail timeline-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.image_thumb | relative_url }}" alt="{{ item.image_alt_text | default: item.description | default: item.title | escape }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.title | escape }}">
-            {% else %}
-            <div class="card mb-3{% if include.float %} feature-float-{{ include.float }}{% endif %}{% if include.width %} feature-w-{{ include.width }}{% endif %}{% if include.centered %} mx-auto{% endif %}">
-                {% if src %}<img class="card-img-top" src="{{ src }}" alt="{{ alt | escape }}">{%- endif -%}
+    <div class="col-xs-3 col-md-5 {{include.container-styles}}">
 
-
-
-            </div>
-            {% endif %}
-
-            <div class ="card">
+            <div class="card">
                 <div class="card-body text-center">
-{% comment %}
-                    <div class="card-text">{{ include.text | markdownify }}</div>
-{%- endcomment -%}
-                        
-                    <div class="h5 text-dark">{{ item.title }}</div>
-                            <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">
-                                {%- assign icon_template = item.display_template | default: item.format -%}
-                                <use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#{% if icon_template contains 'image' %}icon-image{% elsif icon_template contains 'pdf' %}icon-pdf{% elsif icon_template contains 'audio' %}icon-audio{% elsif icon_template contains 'video' %}icon-video{% elsif icon_template contains 'panorama' %}icon-panorama{% elsif icon_template contains 'compound' %}icon-compound-object{% elsif icon_template contains 'multiple' %}icon-multiple{% else %}icon-default{% endif %}"/>
-                            </svg>
+                    <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
+                        <div class="h5 text-dark">{{ item.title }}</div>
+                    </a>
+                    <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
+                        {% if item.image_thumb %}
+                        <img class="lazyload img-thumbnail timeline-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.image_thumb | relative_url }}" alt="{{ item.image_alt_text | default: item.description | default: item.title | escape }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.title | escape }}">
+                        {% else %}
+                        <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#{% if icon_template contains 'pdf' %}icon-pdf{% elsif icon_template contains 'audio' %}icon-audio{% elsif icon_template contains 'video' %}icon-video{% elsif icon_template contains 'panorama' %}icon-panorama{% elsif icon_template contains 'compound' %}icon-compound-object{% elsif icon_template contains 'multiple' %}icon-multiple{% else %}icon-default{% endif %}"/></svg>
+                        <div class="card mb-3{% if include.float %} feature-float-{{ include.float }}{% endif %}{% if include.width %} feature-w-{{ include.width }}{% endif %}{% if include.centered %} mx-auto{% endif %}">
+                            {% if src %}<img class="card-img-top" src="{{ src }}" alt="{{ alt | escape }}">{%- endif -%}
+                        </div>
+                        {% endif %}
+                    </a>
+        
+                    {%- assign fields = site.data.config-metadata | where_exp: 'item', 'item.display_name != nil' -%}
+                    {% if item.subject == "award" %}       
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Amount: </strong>{{item.amount}}<br />
+                        <strong>Organization: </Strong>{{item.institution}}</small></p>
 
-{%- assign fields = site.data.config-browse -%}
-{% comment %}
-{%- assign fields = site.data.config-metadata | where_exp: 'item', 'item.display_name != nil' -%}
-{%- endcomment -%}
+                    {% elsif item.subject == "conference" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Event: </strong>{{item.event}}<br />
+                        <strong>Host: </strong>{{item.institution}}<br />
+                        <strong>Authors: </strong>{{item.authors}}</small></p>
 
-{% if item.subject == award %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Amount: </strong>{{item.amount}}<br/>
-<Strong>Organization: </Strong>{{item.institution}}
-{%- endif -%}
+                    {% elsif item.subject == "education" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Program: </strong>{{item.description}}<br />
+                        <strong>University: </strong>{{item.institution}}</small></p>
 
-{% if item.subject == conference %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Event: </strong>{{item.event}}<br/>
-<strong>Host: </strong>{{item.institution}}<br/>
-<strong>Authors: </strong>{{item.authors}}
-{%- endif -%}
+                    {% elsif item.subject == "lecture" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Event: </strong>{{item.event}}</small></p>
 
-{% if item.subject == education %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Program: </strong>{{item.description}}<br/>
-<strong>University: </strong>{{item.institution}}
-{%- endif -%}
+                    {% elsif item.subject == "media" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Location: </strong>{{item.location}}</small></p>
 
-{% if item.subject == lecture %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Event: </strong>{{item.event}}
-{%- endif -%}
+                    {% elsif item.subject == "professional" %}
+                     <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Role: </strong>{{item.role}}<br />
+                        <strong>Organization: </strong>{{item.institution}}</small></p>
 
-{% if item.subject == media %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Location: </strong>{{item.location}}
-{%- endif -%}
+                    {% elsif item.subject == "publication" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Authors: </strong>{{item.authors}}<br />
+                        <strong>Publication: </strong>{{item.publication}}</small></p>
 
-{% if item.subject == professional %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Role: </strong>{{item.role}}<br/>
-<strong>Organization: </strong>{{item.institution}}
-{%- endif -%}
+                    {% elsif item.subject == "research" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Role: </strong>{{item.role}}<br />
+                        <strong>Project: </strong>{{item.project}}<br />
+                        <strong>Organization: </strong>{{item.institution}}</small></p>
 
-{% if item.subject == research %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Role: </strong>{{item.role}}<br/>
-<strong>Project: </strong>{{item.project}}<br/>
-<strong>Organization: </strong>{{item.institution}}
-{%- endif -%}
+                    {% elsif item.subject == "service" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Role: </strong>{{item.role}}</small></p>
 
-{% if item.subject == service %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Role: </strong>{{item.role}}
-{%- endif -%}
+                    {% elsif item.subject == "teaching" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>Role: </strong>{{item.role}}<br />
+                        <strong>Course: </strong>{{item.course}}<br />
+                        <strong>University: </strong>{{item.institution}}</small></p>
 
-{% if item.subject == teaching %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>Role: </strong>{{item.role}}<br/>
-<strong>Course: </strong>{{item.course}}<br/>
-<strong>University: </strong>{{item.institution}}
-{%- endif -%}
-
-{% if item.subject == workshop %}
-<strong>Date: </strong>{{item.date_range}}<br/>
-<strong>University: </strong>{{item.institution}}
-{%- endif -%}
-
-
+                    {% elsif item.subject == "workshop" %}
+                    <p class="card-text"><small>
+                        <strong>Date: </strong>{{item.date_range}}<br />
+                        <strong>University: </strong>{{item.institution}}</small></p>
+                    {%- endif -%}
+            
+                    <div class="button">
+                        <hr><a href="{{ '/items/' | relative_url }}{{ item.objectid }}.html#" class="btn btn-sm btn-light" title="link to {obj.title}">View Full Record</a>
+                    </div>
                 </div>
             </div>
-        </a>
-    {% endfor %}
+        </div>
+        {% endfor %}
     </div>
+</div>
 
     {% comment %}
         to do: 
         -add padding around cards
         -get the cards to display in a grid instead of one per line
-        -re-upload metadata from google sheets
         -make the image headers smaller (like CB Browse page)
         -add buttons to cards: item format, "View full record"
         -add sort button to page (top right)
