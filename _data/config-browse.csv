@@ -1,6 +1,22 @@
 field,display_name,btn,hidden,sort_name,facet_name
-date_range,Date,,,
 title,Title,true,,,,
-description,,,true,
-subject,,true
-location,,true,,,Location Depicted
+date_range,Date,,,
+description,Description,,,,,
+role,Role,,,,,
+institution,Institution,,,,,
+course,Course,,,,,
+project,Project,,,,,
+authors,Authors,,,,,
+publication,Publication,,,,,
+event,Event,,,,,
+amount,Amount,,,,,
+location,Location,,,DCTERMS.coverage,contentLocation
+latitude,Latitude,,,,,
+longitude,Longitude,,,,,
+source,Source,,true,,,
+source_link,Link,,,,,
+language,Language,,,DCTERMS.language,,
+subject,Subjects,true,,DCTERMS.subject,keywords
+type,Type,,,DCTERMS.type,,
+format,Format,,true,,encodingFormat
+rightsstatement,,,true,DCTERMS.rights,license

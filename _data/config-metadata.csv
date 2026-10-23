@@ -4,20 +4,17 @@ date_range,Date,,,DCTERMS.date,dateCreated
 description,Description,,,DCTERMS.description,description
 role,Role,,,,,
 institution,Institution,,,,,
+supervisor,Supervisor,,,,,
 course,Course,,,,,
 project,Project,,,,,
 authors,Authors,,,,,
 publication,Publication,,,,,
 event,Event,,,,,
 amount,Amount,,,,,
-subject,Subjects,true,,DCTERMS.subject,keywords
+subject,Subjects,true,true,DCTERMS.subject,keywords
 location,Location,,,DCTERMS.coverage,contentLocation
 latitude,Latitude,,,,,
 longitude,Longitude,,,,,
-source,Source,,,,,
-source_link,Link,,,,,
-identifier,Source Identifier,,,,,
-type,Type,,,DCTERMS.type,,
-format,Format,,,,encodingFormat
+source_link,Link,,true,,,
+display_template,Format,,,,encodingFormat
 language,Language,,,DCTERMS.language,,
-rightsstatement,,,,DCTERMS.rights,license

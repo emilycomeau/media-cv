@@ -56,13 +56,13 @@
                     <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
                         {% if item.image_thumb %}
                         <img class="lazyload img-thumbnail timeline-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.image_thumb | relative_url }}" alt="{{ item.image_alt_text | default: item.description | default: item.title | escape }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.title | escape }}">
-                        {% elsif item.format == "compound_object" %}
+                        {% elsif item.display_template == "compound_object" %}
                         <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-compound-object"/></svg>
-                        {% elsif item.format == "video"}
+                        {% elsif item.display_template == "video"}
                         <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-video"/></svg>
-                        {% elsif item.format == "pdf" %}
+                        {% elsif item.display_template == "pdf" %}
                         <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-pdf"/></svg>
-                        {% elsif item.format == "audio" %}
+                        {% elsif item.display_template == "audio" %}
                         <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-audio"/></svg>
                         {% endif %}
                     </a>

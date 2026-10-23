@@ -1,6 +1,5 @@
 display_name,stub,dropdown_parent
 About,,
-About-cb,/about.html,About
 About me,/,About
 Education,/education.html,About
 Awards,/awards.html,About
@@ -14,4 +13,5 @@ Lectures,/lectures.html,Presentations
 Workshops,/workshops.html,Presentations
 Conference Presentations,/conferences.html,Presentations
 Publications,/publications.html
+Media,/media.html
 Map,/map.html
