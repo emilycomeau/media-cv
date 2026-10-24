@@ -31,7 +31,7 @@
 {%- endcomment -%}
 
 {% if include.child-objects == true %}
-{%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid' | order_by: 'date_range, 'desc' -%}
+{%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid' | order_by: 'date_range', 'desc' -%}
 {% else %}
 {%- assign gallery-items = site.data[site.metadata] | where_exp: 'item','item.objectid and item.parentid == nil' | order_by: 'date_range', 'desc' -%}
 {% endif %}
@@ -41,6 +41,7 @@
 {%- elsif include.filter -%}
 {%- assign gallery-items = gallery-items | where_exp: 'item',include.filter -%}
 {% endif %}
+{%- assign gallery-items = gallery-items | sort: "date_range" | reverse -%}
 {% assign gallery-limit = include.limit | default: 200 %}
 {% capture captions %}{{ include.captions | default: "true" }}{% endcapture %}
 
@@ -64,6 +65,8 @@
                         <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-pdf"/></svg>
                         {% elsif item.display_template == "audio" %}
                         <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-audio"/></svg>
+                        {% elsif item.display_template == "item" %}
+                        <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-record"/></svg>
                         {% endif %}
                     </a>
         
@@ -141,6 +144,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
