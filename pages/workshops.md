@@ -7,4 +7,4 @@ permalink: /workshops.html
 ## Workshops Facilitated
 <p></p>
 
-{% include feature/gallery-sorted.html filter-field="subject" filter-value="workshops" %}
+{% include feature/gallery-sorted.html filter-field="subject" filter-value="workshop" %}
