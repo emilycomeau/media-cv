@@ -7,4 +7,4 @@ permalink: /media.html
 ## Media Practice
 <p></p>
 
-{% include feature/gallery-sorted.html filter-field="subject" filter-value="media" %}
+{% include feature/gallery-sorted.html filter-field="subject" filter-value="media" child-objects=true %}
