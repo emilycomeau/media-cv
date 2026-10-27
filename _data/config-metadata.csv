@@ -4,6 +4,7 @@ date_range,Date,,,DCTERMS.date,dateCreated
 description,Description,,,DCTERMS.description,description
 role,Role,,,,,
 institution,Institution,,,,,
+program,Program,,,,,
 supervisor,Supervisor,,,,,
 course,Course,,,,,
 project,Project,,,,,
