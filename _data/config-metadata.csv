@@ -15,7 +15,7 @@ subject,Subjects,true,true,DCTERMS.subject,keywords
 location,Location,,,DCTERMS.coverage,contentLocation
 latitude,Latitude,,,,,
 longitude,Longitude,,,,,
-source,Link,,source_link,,,
+source,Source,,,,,
 source_link,Link,,true,,,
 display_template,Format,,,,encodingFormat
 language,Language,,,DCTERMS.language,,
