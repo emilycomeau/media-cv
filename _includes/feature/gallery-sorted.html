@@ -49,7 +49,7 @@
     {% for item in gallery-items limit:gallery-limit %}
     <div class="col-xs-2 col-md-4 {{include.container-styles}} feature-float-{{ include.float }}">
         <div class="card border-dark mb-3">
-            <h3 class="card-header"><a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >{{ item.title }}</a></h3>
+            <h3 class="card-header">{{ item.title }}<a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" ></a></h3>
             <div class="card-body text-center">
                 {% if item.image_thumb %}
                 <img class="lazyload img-thumbnail timeline-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.image_thumb | relative_url }}" alt="{{ item.image_alt_text | default: item.description | default: item.title | escape }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.title | escape }}">
@@ -59,17 +59,15 @@
                 <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-audio"/></svg>
                 {% endif %}
             </div>
-
             <div class="card-body">
                 {%- assign fields = site.data.config-metadata | where_exp: 'item', 'item.display_name != nil' -%}
-
                 {% if item.subject contains "award" %}       
                 <p class="card-text" small>
                     <strong>Date: </strong>{{item.date_range}}<br />
                     <strong>Amount: </strong>{{item.amount}}<br />
                     <strong>Organization: </Strong>{{item.institution}}<br /></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "conference" %}
@@ -79,7 +77,7 @@
                     <strong>Host: </strong>{{item.institution}}<br />
                     <strong>Authors: </strong>{{item.authors}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "education" %}
@@ -89,7 +87,7 @@
                     <strong>Supervisor: </strong>{{item.supervisor}}<br />
                     <strong>University: </strong>{{item.institution}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "lecture" %}
@@ -97,7 +95,7 @@
                     <strong>Date: </strong>{{item.date_range}}<br />
                     <strong>Event: </strong>{{item.event}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "media" %}
@@ -105,7 +103,7 @@
                     <strong>Date: </strong>{{item.date_range}}<br />
                     <strong>Location: </strong>{{item.location}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "professional" %}
@@ -114,7 +112,7 @@
                     <strong>Role: </strong>{{item.role}}<br />
                     <strong>Organization: </strong>{{item.institution}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "publication" %}
@@ -123,7 +121,7 @@
                     <strong>Authors: </strong>{{item.authors}}<br />
                     <strong>Publication: </strong>{{item.publication}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "research" %}
@@ -133,7 +131,7 @@
                     <strong>Project: </strong>{{item.project}}<br />
                     <strong>Organization: </strong>{{item.institution}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "service" %}
@@ -142,7 +140,7 @@
                     <strong>Role: </strong>{{item.role}}<br />
                     <strong>Organization: </Strong>{{item.institution}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "teaching" %}
@@ -152,7 +150,7 @@
                     <strong>Course: </strong>{{item.course}}<br />
                     <strong>University: </strong>{{item.institution}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
 
                 {% elsif item.subject contains "workshop" %}
@@ -160,7 +158,7 @@
                     <strong>Date: </strong>{{item.date_range}}<br />
                     <strong>University: </strong>{{item.institution}}</small></p>
                 {% unless item.display_template == "record" %}
-                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light text-center">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                <a class="btn btn-sm btn-outline-primary bg-primary small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                 {%- endunless -%}
                 {%- endif -%}
             
