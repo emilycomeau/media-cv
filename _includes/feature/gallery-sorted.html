@@ -49,11 +49,13 @@
     {% for item in gallery-items limit:gallery-limit %}
     <div class="col-xs-2 col-md-4 {{include.container-styles}}">
 
-            <div class="card mb-3 feature-float-{{ include.float }}">
+            <div class="card border-dark mb-3 feature-float-{{ include.float }}">
+                <h3 class="card-header"><a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
+                    <div class="h5 text-primary">{{ item.title }}</div></a>
+                </h3>
                 <div class="card-body text-center">
                     <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
-                        <div class="h5 text-dark">{{ item.title }}</div>
-                    </a>
+                        <div class="h5 text-dark">{{ item.title }}</div></a>
                     <a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" >
                         {% if item.image_thumb %}
                         <img class="lazyload img-thumbnail timeline-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.image_thumb | relative_url }}" alt="{{ item.image_alt_text | default: item.description | default: item.title | escape }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.title | escape }}">
@@ -67,24 +69,28 @@
                         <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-audio"/></svg>
                         {% elsif item.display_template == "item" %}
                         <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">{%- assign icon_template = item.display_template | default: item.format -%}<use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-record"/></svg>
-                        {% endif %}
-                    </a>
-        
+                        {% endif %}</a>
+                </div>
+                <div class="card-body">
                     {%- assign fields = site.data.config-metadata | where_exp: 'item', 'item.display_name != nil' -%}
                     {% if item.subject contains "award" %}       
                     <p class="card-text" small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Amount: </strong>{{item.amount}}<br />
                         <strong>Organization: </Strong>{{item.institution}}<br /></p>
-                    <a class="btn btn-sm btn-outline-primary bg-dark small disabled">{{ item.display_template | upcase | default: "Record" }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
-                   
+                    {% unless item.display_template == "record" %}
+                    <a class="btn btn-sm btn-outline-primary bg-dark small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                    {%- endunless -%}
+
                     {% elsif item.subject contains "conference" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Event: </strong>{{item.event}}<br />
                         <strong>Host: </strong>{{item.institution}}<br />
                         <strong>Authors: </strong>{{item.authors}}</small></p>
-                    <a class="btn btn-sm btn-outline-secondary" >{{obj.display_template.toUpperCase()}}{{mediaIcon}}</a>
+                    {% unless item.display_template == "record" %}
+                    <a class="btn btn-sm btn-outline-primary bg-dark small disabled text-light">{{ item.display_template | upcase }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                    {%- endunless -%}
 
                     {% elsif item.subject contains "education" %}
                     <p class="card-text"><small>
