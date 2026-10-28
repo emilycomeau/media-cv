@@ -12,7 +12,7 @@ permalink: /education.html
 
 <div class="button text-center">
     <div class="btn-group me-2" role="group" aria-label="pages button group">
-        <button type="button" class="btn btn-success">{% include feature/button.html text="Awards" link="https://emilycomeau.github.io/media-cv/awards.html" %}</button>
-        <button type="button" class="btn btn-success">{% include feature/button.html text="Service" link="https://emilycomeau.github.io/media-cv/service.html" %}</button>
+        <button type="button" class="btn btn-secondary">{% include feature/button.html text="Awards" link="https://emilycomeau.github.io/media-cv/awards.html" %}</button>
+        <button type="button" class="btn btn-secondary">{% include feature/button.html text="Service" link="https://emilycomeau.github.io/media-cv/service.html" %}</button>
     </div>
 </div>
