@@ -76,8 +76,8 @@
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Amount: </strong>{{item.amount}}<br />
                         <strong>Organization: </Strong>{{item.institution}}<br /></p>
-                        <p class="btn btn-sm btn-outline-secondary small">{{ item.display_template | upcase | default: "Record" }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></p> 
-
+                    <a class="btn btn-sm btn-outline-secondary small disabled">{{ item.display_template | upcase | default: "Record" }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                   
                     {% elsif item.subject contains "conference" %}
                     <p class="card-text"><small>
                         <strong>Date: </strong>{{item.date_range}}<br />
@@ -159,8 +159,3 @@
     {% endfor %}
 </div>
 
-
-{% comment %}
-            role="button"
-            data-bs-toggle="modal"
-{%- endcomment -%}

@@ -100,12 +100,12 @@ search-child-objects: true # true / false - if true, child objects will appear o
 navbar-color: dark
 # navbar background color, https://getbootstrap.com/docs/5.3/utilities/background/
 # Choose from bg-primary, bg-secondary, bg-success, bg-danger, bg-warning, bg-info, bg-light, bg-dark, bg-white
-navbar-background: bg-black
+navbar-background: bg-dark
 
 # BOOTSWATCH THEMES [optional!]
 # You can replace the standard Bootstrap theme with a Bootswatch (https://github.com/thomaspark/bootswatch) option
 # Choose from: brite; cerulean; cosmo; cyborg; darkly; flatly; journal; litera; lumen; lux; materia; minty; morph; pulse; quartz; sandstone; simplex; sketchy; slate; solar; spacelab; superhero; united; vapor; yeti; zephyr 
-bootswatch: # leave blank or comment out for plain bootstrap
+bootswatch: flatly # leave blank or comment out for plain bootstrap
 
 # THEME FONTS [optional!]
 base-font-size: 1.2em
