@@ -76,7 +76,7 @@
                         <strong>Date: </strong>{{item.date_range}}<br />
                         <strong>Amount: </strong>{{item.amount}}<br />
                         <strong>Organization: </Strong>{{item.institution}}<br /></p>
-                    <a class="btn btn-sm btn-outline-secondary small disabled">{{ item.display_template | upcase | default: "Record" }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
+                    <a class="btn btn-sm btn-outline-primary bg-dark small disabled">{{ item.display_template | upcase | default: "Record" }} <svg class="bi icon-sprite" fill="currentColor" aria-hidden="true"><use href="{{ '/assets/css/cb-icons.svg' | relative_url }}#icon-{{ item.display_template | default: 'file'}}"/></svg></a> 
                    
                     {% elsif item.subject contains "conference" %}
                     <p class="card-text"><small>
