@@ -1,8 +1,10 @@
 <div class="card-body">
 
-    <{{ include.heading_level | default: 'h2' | strip }} class="card-title h5">About Me</{{ include.heading_level | default: 'h2' | strip }}>
+    <{{ include.heading_level | default: 'h2' | strip }} class="card-title h3">About Me</{{ include.heading_level | default: 'h2' | strip }}>
    
+    <p></p>
     <p class="card-text">{{ site.about }}</p>
+    <p></p>
 
 </div>
 
