@@ -49,8 +49,10 @@
     {% for item in gallery-items limit:gallery-limit %}
     <div class="col-xs-2 col-md-4 {{include.container-styles}} feature-float-{{ include.float }}">
         <div class="card border-dark mb-3">
-            <div class="card-body">
-                <h3 class="card title h3 {{ include.heading_level | default: 'h3' | strip }}"><a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" class="text-dark" >{{ item.title }}</a></h3>
+            <div class="card-body"><h3 class="card-title h4"><a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" class="text-dark">${item.title}</a></h3>
+{% comment %}
+            <h3 class="card title h3 {{ include.heading_level | default: 'h3' | strip }}"><a href="{{ '/items/' | relative_url }}{% if item.parentid %}{{ item.parentid }}.html#{{ item.objectid }}{% else %}{{ item.objectid }}.html{% endif %}" class="text-dark" >{{ item.title }}</a></h3>
+{%- endcomment -%}    
             </div>
             {% if item.image_thumb %}
             <div class="card-body text-center">
